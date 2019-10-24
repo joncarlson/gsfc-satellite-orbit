@@ -1,18 +1,44 @@
 {
-  "name": "gsfc-satellite-orbit",
-  "private": true,
-  "version": "0.0.1",
-  "description": "Stencil App Starter",
-  "scripts": {
-    "build": "stencil build",
-    "start": "stencil build --dev --watch --serve",
-    "test": "stencil test --spec --e2e",
-    "test.watch": "stencil test --spec --e2e --watchAll",
-    "generate": "stencil generate"
-  },
-  "dependencies": {
-    "@stencil/core": "1.7.4",
-    "@stencil/router": "^1.0.1"
-  },
-  "license": "MIT"
+    "name": "gsfc-satellite-orbit",
+    "private": true,
+    "version": "0.0.1",
+    "description": "",
+    "scripts": {
+        "build": "stencil build",
+        "start": "stencil build --dev --watch --serve",
+        "test": "stencil test --spec --e2e",
+        "test.watch": "stencil test --spec --e2e --watchAll",
+        "generate": "stencil generate"
+    },
+    "dependencies": {
+        "@stencil/core": "1.7.4",
+        "@stencil/router": "^1.0.1",
+        "three": "^0.109.0"
+    },
+    "license": "MIT",
+    "devDependencies": {
+        "husky": "^3.0.9",
+        "lint-staged": "^9.4.2",
+        "prettier": "^1.18.2"
+    },
+    "prettier": {
+        "trailingComma": "es5",
+        "useTabs": false,
+        "tabWidth": 4,
+        "semi": false,
+        "singleQuote": true,
+        "quoteProps": "as-needed",
+        "bracketSpacing": true
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.{js,ts,tsx,css,json,md}": [
+            "prettier --write",
+            "git add"
+        ]
+    }
 }
