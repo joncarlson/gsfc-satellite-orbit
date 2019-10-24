@@ -10,27 +10,39 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface AppScene {}
+  interface AppEarth {}
+  interface GdGlobe {}
 }
 
 declare global {
 
 
-  interface HTMLAppSceneElement extends Components.AppScene, HTMLStencilElement {}
-  var HTMLAppSceneElement: {
-    prototype: HTMLAppSceneElement;
-    new (): HTMLAppSceneElement;
+  interface HTMLAppEarthElement extends Components.AppEarth, HTMLStencilElement {}
+  var HTMLAppEarthElement: {
+    prototype: HTMLAppEarthElement;
+    new (): HTMLAppEarthElement;
+  };
+
+  interface HTMLGdGlobeElement extends Components.GdGlobe, HTMLStencilElement {}
+  var HTMLGdGlobeElement: {
+    prototype: HTMLGdGlobeElement;
+    new (): HTMLGdGlobeElement;
   };
   interface HTMLElementTagNameMap {
-    'app-scene': HTMLAppSceneElement;
+    'app-earth': HTMLAppEarthElement;
+    'gd-globe': HTMLGdGlobeElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface AppScene {}
+  interface AppEarth {
+    'onInit'?: (event: CustomEvent<any>) => void;
+  }
+  interface GdGlobe {}
 
   interface IntrinsicElements {
-    'app-scene': AppScene;
+    'app-earth': AppEarth;
+    'gd-globe': GdGlobe;
   }
 }
 
@@ -40,7 +52,8 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
-      'app-scene': LocalJSX.AppScene & JSXBase.HTMLAttributes<HTMLAppSceneElement>;
+      'app-earth': LocalJSX.AppEarth & JSXBase.HTMLAttributes<HTMLAppEarthElement>;
+      'gd-globe': LocalJSX.GdGlobe & JSXBase.HTMLAttributes<HTMLGdGlobeElement>;
     }
   }
 }
