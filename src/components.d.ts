@@ -42,7 +42,6 @@ declare namespace LocalJSX {
   interface GdSatellite {
     'name'?: string;
     'noradId'?: number;
-    'onFoundPosition'?: (event: CustomEvent<any>) => void;
   }
 
   interface IntrinsicElements {

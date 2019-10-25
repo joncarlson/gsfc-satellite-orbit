@@ -1,5 +1,6 @@
-import { Component, h, Host, Prop, Event, EventEmitter } from '@stencil/core'
+import { Component, h, Host, Prop } from '@stencil/core'
 import axios from 'axios'
+import { threeService } from '../../services/three-service'
 
 const api = axios.create({
     baseURL: 'https://www.n2yo.com/rest/v1/satellite',
@@ -20,8 +21,6 @@ export class Satellite {
     @Prop() noradId: number
     @Prop() name: string
 
-    @Event({ bubbles: true }) foundPosition: EventEmitter
-
     componentDidLoad() {
         if (!this.noradId) throw new Error('Need to provide a Norad ID!')
 
@@ -34,7 +33,13 @@ export class Satellite {
             `/positions/${this.noradId}/${OBSERVER_LATITUDE}/${OBSERVER_LONGITUDE}/${OBSERVER_ALTITUDE}/${SECONDS_OF_FUTURE_POSITIONS}&apiKey=${process.env.TRACKER_API_KEY}`
         )
         console.log('emitting ', response.data)
-        this.foundPosition.emit(response.data)
+
+        let positions = response.data.positions
+
+        threeService.addSatellite(
+            positions[0].satlatitude,
+            positions[0].satlongitude
+        )
     }
 
     render() {
