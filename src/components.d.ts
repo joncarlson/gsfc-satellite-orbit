@@ -10,39 +10,44 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface AppEarth {}
   interface GdGlobe {}
+  interface GdSatellite {
+    'name': string;
+    'noradId': number;
+  }
 }
 
 declare global {
 
-
-  interface HTMLAppEarthElement extends Components.AppEarth, HTMLStencilElement {}
-  var HTMLAppEarthElement: {
-    prototype: HTMLAppEarthElement;
-    new (): HTMLAppEarthElement;
-  };
 
   interface HTMLGdGlobeElement extends Components.GdGlobe, HTMLStencilElement {}
   var HTMLGdGlobeElement: {
     prototype: HTMLGdGlobeElement;
     new (): HTMLGdGlobeElement;
   };
+
+  interface HTMLGdSatelliteElement extends Components.GdSatellite, HTMLStencilElement {}
+  var HTMLGdSatelliteElement: {
+    prototype: HTMLGdSatelliteElement;
+    new (): HTMLGdSatelliteElement;
+  };
   interface HTMLElementTagNameMap {
-    'app-earth': HTMLAppEarthElement;
     'gd-globe': HTMLGdGlobeElement;
+    'gd-satellite': HTMLGdSatelliteElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface AppEarth {
-    'onInit'?: (event: CustomEvent<any>) => void;
-  }
   interface GdGlobe {}
+  interface GdSatellite {
+    'name'?: string;
+    'noradId'?: number;
+    'onFoundPosition'?: (event: CustomEvent<any>) => void;
+  }
 
   interface IntrinsicElements {
-    'app-earth': AppEarth;
     'gd-globe': GdGlobe;
+    'gd-satellite': GdSatellite;
   }
 }
 
@@ -52,8 +57,8 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
-      'app-earth': LocalJSX.AppEarth & JSXBase.HTMLAttributes<HTMLAppEarthElement>;
       'gd-globe': LocalJSX.GdGlobe & JSXBase.HTMLAttributes<HTMLGdGlobeElement>;
+      'gd-satellite': LocalJSX.GdSatellite & JSXBase.HTMLAttributes<HTMLGdSatelliteElement>;
     }
   }
 }
